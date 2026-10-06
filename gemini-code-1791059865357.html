@@ -1,0 +1,3081 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Punjab Emergency Help Hub - Verified emergency, rescue, police, and civic helplines across Punjab, Pakistan.">
+  <meta name="theme-color" content="#0B3D2E">
+  <title>Punjab Emergency Help Hub | پنجاب ایمرجنسی ہیلپ ہب</title>
+
+  <!-- Inline Favicon (Original Shield + Cross + Heartbeat Logo) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%231F7A4D'/%3E%3Cstop offset='100%25' stop-color='%230B3D2E'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M32 4 C18 4 8 14 8 28 C8 46 24 56 32 60 C40 56 56 46 56 28 C56 14 46 4 32 4 Z' fill='url(%23g)' stroke='%23ffffff' stroke-width='2'/%3E%3Cpath d='M30 18h4v24h-4zM20 28h24v4h-24z' fill='%23ffffff' opacity='0.7'/%3E%3Cpath d='M12 30h10l3-7 4 15 4-19 4 15 3-4h12' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+  <style>
+    /* ==========================================================================
+       1. CSS RESET & CSS CUSTOM PROPERTIES (THEMING & GLASSMORPHISM)
+       ========================================================================== */
+    :root {
+      --deep-green: #0B3D2E;
+      --mid-green: #1F7A4D;
+      --bright-accent: #2FA36B;
+      --soft-tint: #EAF4EE;
+      --white: #FFFFFF;
+      --ink: #12261D;
+      --muted: #4D6358;
+      --danger: #B42318;
+      --danger-bg: #FDF2F2;
+      --danger-border: #FECDCA;
+      --card-bg: #FFFFFF;
+      --page-bg: #F7FAF8;
+      --border-subtle: rgba(11, 61, 46, 0.1);
+      --glass-bg: rgba(255, 255, 255, 0.72);
+      --glass-border: rgba(255, 255, 255, 0.55);
+      --glass-shadow: 0 8px 32px rgba(11, 61, 46, 0.08);
+      --card-shadow: 0 2px 4px rgba(11, 61, 46, 0.04), 0 10px 24px rgba(11, 61, 46, 0.07);
+      --card-hover-shadow: 0 4px 8px rgba(11, 61, 46, 0.06), 0 16px 36px rgba(11, 61, 46, 0.13);
+      --focus-ring: 0 0 0 3px rgba(47, 163, 107, 0.45);
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-full: 999px;
+      --trans-speed: 0.22s;
+      --font-en: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-ur: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Urdu Typesetting", "Noto Naskh Arabic", Tahoma, serif;
+    }
+
+    html.dark {
+      --deep-green: #071E17;
+      --mid-green: #1C6B43;
+      --bright-accent: #34B777;
+      --soft-tint: #132D23;
+      --white: #E6F0EA;
+      --ink: #EAF3EE;
+      --muted: #95ADA1;
+      --danger: #F04438;
+      --danger-bg: #2B1214;
+      --danger-border: #7A2722;
+      --card-bg: #0F281E;
+      --page-bg: #071510;
+      --border-subtle: rgba(255, 255, 255, 0.1);
+      --glass-bg: rgba(11, 35, 26, 0.78);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+      --card-shadow: 0 2px 6px rgba(0, 0, 0, 0.25), 0 12px 28px rgba(0, 0, 0, 0.35);
+      --card-hover-shadow: 0 4px 10px rgba(0, 0, 0, 0.35), 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font-en);
+      background-color: var(--page-bg);
+      color: var(--ink);
+      line-height: 1.55;
+      position: relative;
+      overflow-x: hidden;
+      transition: background-color var(--trans-speed) ease, color var(--trans-speed) ease;
+    }
+
+    /* RTL typography enhancement for Urdu */
+    html[lang="ur"] body,
+    html[dir="rtl"] body {
+      font-family: var(--font-ur);
+      line-height: 2;
+    }
+
+    /* Phone numbers must always maintain strict LTR orientation */
+    .service-number, .ltr-num {
+      direction: ltr !important;
+      unicode-bidi: isolate !important;
+      font-family: var(--font-en) !important;
+    }
+
+    /* Subtle Paper Grain Overlay */
+    .grain-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* Ambient Background Light Orbs */
+    .ambient-glow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 700px;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.16;
+    }
+    .glow-1 {
+      top: -120px;
+      left: 15%;
+      width: 480px;
+      height: 480px;
+      background: var(--mid-green);
+    }
+    .glow-2 {
+      top: 60px;
+      right: 10%;
+      width: 420px;
+      height: 420px;
+      background: var(--bright-accent);
+    }
+    .glow-3 {
+      top: 240px;
+      left: 40%;
+      width: 380px;
+      height: 380px;
+      background: #48bb78;
+      opacity: 0.1;
+    }
+
+    /* Glass Panels with Solid Fallback */
+    .glass-panel {
+      background-color: var(--white);
+      border: 1px solid var(--border-subtle);
+    }
+    @supports (backdrop-filter: blur(16px)) or (-webkit-backdrop-filter: blur(16px)) {
+      .glass-panel {
+        background-color: var(--glass-bg);
+        backdrop-filter: blur(16px) saturate(140%);
+        -webkit-backdrop-filter: blur(16px) saturate(140%);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shadow);
+      }
+    }
+
+    /* Layout Container */
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin-inline: auto;
+      padding-inline: 1.25rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Keyboard Accessible Skip Link */
+    .skip-link {
+      position: absolute;
+      top: -50px;
+      inset-inline-start: 1rem;
+      background: var(--deep-green);
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--radius-sm);
+      z-index: 10000;
+      text-decoration: none;
+      font-weight: 600;
+      transition: top 0.2s;
+    }
+    .skip-link:focus {
+      top: 12px;
+      outline: 2px solid var(--bright-accent);
+    }
+
+    /* ==========================================================================
+       2. FAST LOADING SCREEN & ANIMATIONS
+       ========================================================================== */
+    #loader {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: radial-gradient(circle at center, #154e39 0%, #0B3D2E 100%);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+      animation: autoHideFallback 1s forwards ease 1s; /* CSS safety fallback */
+    }
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    @keyframes autoHideFallback {
+      to {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+    }
+    .loader-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 320px;
+      text-align: center;
+    }
+    .loader-logo-wrap {
+      width: 90px;
+      height: 90px;
+      margin-bottom: 1.25rem;
+      animation: pulseIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .loader-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+      color: #ffffff;
+    }
+    .loader-bar-wrap {
+      width: 180px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .loader-bar-fill {
+      width: 0%;
+      height: 100%;
+      background: var(--bright-accent);
+      border-radius: 999px;
+      animation: loadFill 0.75s ease-out forwards;
+    }
+    @keyframes loadFill {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+    @keyframes pulseIn {
+      0% { transform: scale(0.85); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .heartbeat-draw {
+      stroke-dasharray: 120;
+      stroke-dashoffset: 120;
+      animation: drawEcG 0.8s ease-in-out forwards 0.1s;
+    }
+    @keyframes drawEcG {
+      to { stroke-dashoffset: 0; }
+    }
+
+    /* ==========================================================================
+       3. HEADER & NAVIGATION
+       ========================================================================== */
+    .scroll-progress-bar {
+      position: fixed;
+      top: 0;
+      inset-inline: 0;
+      height: 3px;
+      background: var(--bright-accent);
+      width: 0%;
+      z-index: 1001;
+      transition: width 0.1s linear;
+    }
+
+    header.site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: box-shadow var(--trans-speed) ease;
+    }
+    header.site-header.scrolled {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand-logo-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02));
+      border: 1px solid var(--glass-border);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    }
+    .brand-titles {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--deep-green);
+      line-height: 1.2;
+    }
+    html.dark .brand-name {
+      color: var(--white);
+    }
+    .brand-region-pill {
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-desktop {
+      display: none;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    .nav-desktop a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      position: relative;
+      padding-block: 0.25rem;
+      transition: color var(--trans-speed);
+    }
+    .nav-desktop a:hover,
+    .nav-desktop a.active {
+      color: var(--mid-green);
+    }
+    html.dark .nav-desktop a:hover,
+    html.dark .nav-desktop a.active {
+      color: var(--bright-accent);
+    }
+    .nav-desktop a.active::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      inset-inline: 0;
+      height: 2px;
+      background: var(--mid-green);
+      border-radius: 2px;
+    }
+    html.dark .nav-desktop a.active::after {
+      background: var(--bright-accent);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .icon-btn, .lang-toggle-btn {
+      min-height: 44px;
+      min-width: 44px;
+      padding: 0.4rem 0.75rem;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-subtle);
+      background: var(--card-bg);
+      color: var(--ink);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      transition: all var(--trans-speed) ease;
+    }
+    .icon-btn:hover, .lang-toggle-btn:hover {
+      background: var(--soft-tint);
+      border-color: var(--mid-green);
+      transform: translateY(-1px);
+    }
+    .icon-btn:focus-visible, .lang-toggle-btn:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+    .hamburger-btn {
+      display: flex;
+    }
+
+    @media (min-width: 900px) {
+      .nav-desktop {
+        display: flex;
+      }
+      .hamburger-btn {
+        display: none;
+      }
+    }
+
+    /* Mobile Sheet / Drawer */
+    .mobile-drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    .mobile-drawer-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      inset-inline-end: 0;
+      width: min(85vw, 340px);
+      z-index: 2001;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -8px 0 30px rgba(0, 0, 0, 0.25);
+    }
+    html[dir="rtl"] .mobile-drawer {
+      transform: translateX(-100%);
+    }
+    .mobile-drawer-overlay.active .mobile-drawer {
+      transform: translateX(0);
+    }
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .drawer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .drawer-nav a {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 1.15rem;
+      font-weight: 600;
+      padding: 0.6rem 0.8rem;
+      border-radius: var(--radius-sm);
+      transition: background var(--trans-speed);
+    }
+    .drawer-nav a:hover {
+      background: var(--soft-tint);
+    }
+    .drawer-controls {
+      margin-top: auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    /* ==========================================================================
+       4. HERO SECTION & PRIORITY NUMBERS (1122 & 15)
+       ========================================================================== */
+    .hero-section {
+      padding-top: 2rem;
+      padding-bottom: 1.5rem;
+      text-align: center;
+    }
+    .hero-title {
+      font-size: clamp(1.65rem, 4vw, 2.75rem);
+      font-weight: 800;
+      color: var(--deep-green);
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    html.dark .hero-title {
+      color: var(--white);
+    }
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted);
+      max-width: 650px;
+      margin-inline: auto;
+      margin-bottom: 2rem;
+    }
+
+    /* Big Hero Emergency Panels (1122 & 15) */
+    .hero-priority-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      max-width: 760px;
+      margin-inline: auto;
+      margin-bottom: 2rem;
+    }
+    @media (min-width: 640px) {
+      .hero-priority-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .hero-panel {
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--card-shadow);
+      border-top: 4px solid var(--mid-green);
+      transition: transform var(--trans-speed) ease, box-shadow var(--trans-speed) ease;
+    }
+    .hero-panel:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--card-hover-shadow);
+    }
+    .hero-panel-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .hero-panel-num {
+      font-size: clamp(2.8rem, 8vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.05;
+      color: var(--deep-green);
+      letter-spacing: -0.03em;
+      margin-block: 0.35rem;
+    }
+    html.dark .hero-panel-num {
+      color: #FFFFFF;
+    }
+    .hero-panel-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    .pulse-subtle {
+      animation: subtlePulse 2.8s infinite ease-in-out;
+    }
+    @keyframes subtlePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.025); }
+    }
+
+    /* Safety Notice Banners */
+    .notice-banners {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      max-width: 860px;
+      margin-inline: auto;
+      margin-bottom: 2rem;
+    }
+    .notice-banner {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.9rem 1.25rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .notice-danger {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid var(--danger-border);
+    }
+    .notice-neutral {
+      background: var(--soft-tint);
+      color: var(--deep-green);
+      border: 1px solid var(--border-subtle);
+    }
+    html.dark .notice-neutral {
+      color: var(--ink);
+    }
+
+    /* ==========================================================================
+       5. SEARCH & CATEGORY CHIPS
+       ========================================================================== */
+    .sticky-controls-wrap {
+      position: sticky;
+      top: 70px;
+      z-index: 900;
+      padding-block: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .search-box-container {
+      position: relative;
+      max-width: 860px;
+      margin-inline: auto;
+      margin-bottom: 0.75rem;
+    }
+    .search-input-field {
+      width: 100%;
+      height: 52px;
+      padding-inline: 3rem 3rem;
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--ink);
+      background: var(--card-bg);
+      border: 2px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      box-shadow: 0 4px 14px rgba(11, 61, 46, 0.05);
+      transition: all var(--trans-speed) ease;
+    }
+    .search-input-field:focus {
+      outline: none;
+      border-color: var(--mid-green);
+      box-shadow: var(--focus-ring);
+    }
+    .search-icon-pos {
+      position: absolute;
+      inset-inline-start: 1.1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+      display: flex;
+    }
+    .search-clear-btn {
+      position: absolute;
+      inset-inline-end: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: var(--radius-full);
+      display: none;
+    }
+    .search-clear-btn.visible {
+      display: flex;
+    }
+    .search-clear-btn:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+
+    /* Horizontally Scrollable Category Chips */
+    .chips-scroll-row {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-block: 0.25rem 0.5rem;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      max-width: 100%;
+    }
+    .chips-scroll-row::-webkit-scrollbar {
+      display: none;
+    }
+    .category-chip {
+      white-space: nowrap;
+      padding: 0.45rem 1rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border-radius: var(--radius-full);
+      background: var(--card-bg);
+      color: var(--muted);
+      border: 1px solid var(--border-subtle);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all var(--trans-speed) ease;
+      flex-shrink: 0;
+    }
+    .category-chip:hover {
+      background: var(--soft-tint);
+      color: var(--ink);
+    }
+    .category-chip.active {
+      background: var(--mid-green);
+      color: #ffffff;
+      border-color: var(--mid-green);
+      box-shadow: 0 2px 8px rgba(31, 122, 77, 0.35);
+    }
+
+    /* Result summary status */
+    .results-status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       6. PINNED CARDS ("MY NUMBERS")
+       ========================================================================== */
+    .pinned-section {
+      margin-bottom: 2rem;
+      display: none;
+    }
+    .pinned-section.has-pins {
+      display: block;
+    }
+    .pinned-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+    .pinned-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--deep-green);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    html.dark .pinned-title {
+      color: var(--white);
+    }
+    .clear-pins-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+    .clear-pins-btn:hover {
+      color: var(--danger);
+    }
+
+    /* ==========================================================================
+       7. SERVICE CARDS GRID
+       ========================================================================== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-bottom: 3.5rem;
+    }
+    @media (min-width: 700px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 1060px) {
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .service-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      padding: 1.35rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border-subtle);
+      border-top: 3px solid var(--mid-green);
+      box-shadow: var(--card-shadow);
+      transition: transform var(--trans-speed) cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow var(--trans-speed) ease,
+                  border-color var(--trans-speed) ease;
+    }
+    .service-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--card-hover-shadow);
+      border-top-color: var(--bright-accent);
+    }
+    .service-card:focus-within {
+      outline: none;
+      box-shadow: var(--focus-ring), var(--card-hover-shadow);
+    }
+
+    .card-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+    .card-category-pill {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+      background: var(--soft-tint);
+      color: var(--mid-green);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    html.dark .card-category-pill {
+      color: var(--bright-accent);
+    }
+    .card-pin-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 0.35rem;
+      border-radius: 50%;
+      display: flex;
+      transition: color var(--trans-speed);
+    }
+    .card-pin-btn:hover {
+      color: #EAAA08;
+    }
+    .card-pin-btn.pinned {
+      color: #EAAA08;
+    }
+
+    .card-service-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+    .card-service-num {
+      font-size: clamp(2rem, 5vw, 2.5rem);
+      font-weight: 800;
+      color: var(--deep-green);
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    html.dark .card-service-num {
+      color: var(--white);
+    }
+    .card-desc {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    /* "When to use" callout */
+    .card-usage-box {
+      background: var(--soft-tint);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: var(--ink);
+      border-inline-start: 3px solid var(--mid-green);
+    }
+    .card-usage-title {
+      font-weight: 700;
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--mid-green);
+    }
+    html.dark .card-usage-title {
+      color: var(--bright-accent);
+    }
+
+    /* Card meta and actions */
+    .card-meta-box {
+      font-size: 0.75rem;
+      color: var(--muted);
+      border-top: 1px dashed var(--border-subtle);
+      padding-top: 0.75rem;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .card-link {
+      color: var(--mid-green);
+      font-weight: 600;
+      text-decoration: underline;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    html.dark .card-link {
+      color: var(--bright-accent);
+    }
+
+    .card-action-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .copy-btn {
+      width: 100%;
+      min-height: 44px;
+      padding: 0.6rem 1rem;
+      border-radius: var(--radius-sm);
+      background: var(--soft-tint);
+      color: var(--deep-green);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all var(--trans-speed) ease;
+    }
+    html.dark .copy-btn {
+      color: var(--white);
+    }
+    .copy-btn:hover {
+      background: var(--mid-green);
+      color: #ffffff;
+      border-color: var(--mid-green);
+    }
+    .copy-btn:active {
+      transform: scale(0.98);
+    }
+    .copy-btn:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+
+    /* Empty state */
+    .empty-results-box {
+      text-align: center;
+      padding: 3.5rem 1.5rem;
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 3rem;
+      display: none;
+    }
+    .empty-results-box.show {
+      display: block;
+    }
+    .empty-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .empty-suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .suggestion-chip {
+      background: var(--soft-tint);
+      border: 1px solid var(--border-subtle);
+      padding: 0.35rem 0.8rem;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: var(--mid-green);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       8. SECTIONS (CALL GUIDE, DEPARTMENTS, SOURCES)
+       ========================================================================== */
+    .content-section {
+      padding-block: 2.5rem;
+      border-top: 1px solid var(--border-subtle);
+      content-visibility: auto;
+      contain-intrinsic-size: 400px;
+    }
+    .section-title {
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      font-weight: 800;
+      color: var(--deep-green);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    html.dark .section-title {
+      color: var(--white);
+    }
+    .section-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 1.75rem;
+      max-width: 720px;
+    }
+
+    /* Call Guide Sequence */
+    .guide-steps-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (min-width: 768px) {
+      .guide-steps-list {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+    }
+    .guide-step-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      display: flex;
+      gap: 1rem;
+      box-shadow: var(--card-shadow);
+    }
+    .step-number-badge {
+      width: 36px;
+      height: 36px;
+      background: var(--mid-green);
+      color: #fff;
+      font-weight: 800;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .step-text {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    /* Departments Grid */
+    .depts-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    @media (min-width: 700px) {
+      .depts-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 1024px) {
+      .depts-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .dept-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.75rem;
+      box-shadow: var(--card-shadow);
+      transition: transform var(--trans-speed) ease;
+    }
+    .dept-card:hover {
+      transform: translateY(-2px);
+    }
+    .dept-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .dept-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    /* ==========================================================================
+       9. RICH FOOTER & CORNER WATERMARK
+       ========================================================================== */
+    footer.site-footer {
+      background: var(--deep-green);
+      color: #FFFFFF;
+      padding-top: 3.5rem;
+      padding-bottom: 2.5rem;
+      margin-top: 3rem;
+      position: relative;
+      z-index: 2;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (min-width: 600px) {
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 992px) {
+      .footer-grid {
+        grid-template-columns: 2fr 1fr 1.2fr 1.4fr;
+      }
+    }
+    .footer-col-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--bright-accent);
+    }
+    .footer-links-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .footer-links-list a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color var(--trans-speed);
+    }
+    .footer-links-list a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+    .footer-numbers-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .footer-num-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 0.35rem;
+    }
+    .footer-small-copy {
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      padding: 0.2rem;
+      display: flex;
+    }
+    .footer-small-copy:hover {
+      color: #ffffff;
+    }
+
+    .footer-action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      padding-block: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .footer-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: background var(--trans-speed);
+    }
+    .footer-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.68);
+    }
+    @media (min-width: 768px) {
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    /* Fixed Watermark Badge */
+    .fixed-credit-pill {
+      position: fixed;
+      bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+      inset-inline-end: 12px;
+      z-index: 850;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--muted);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* ==========================================================================
+       10. DIALOGS, MODALS & TOAST
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 10000;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-card {
+      width: 100%;
+      max-width: 440px;
+      padding: 2rem;
+      border-radius: var(--radius-md);
+      text-align: center;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+    }
+    .modal-logo {
+      width: 60px;
+      height: 60px;
+      margin-inline: auto;
+      margin-bottom: 1rem;
+    }
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .modal-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .lang-options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .lang-choice-btn {
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--border-subtle);
+      background: var(--card-bg);
+      color: var(--ink);
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      transition: all var(--trans-speed) ease;
+    }
+    .lang-choice-btn:hover,
+    .lang-choice-btn.selected {
+      border-color: var(--mid-green);
+      background: var(--soft-tint);
+    }
+    .modal-skip-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    /* Toast */
+    #toast-msg {
+      position: fixed;
+      bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      z-index: 11000;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+    #toast-msg.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* ==========================================================================
+       11. REDUCED MOTION & PRINT STYLES
+       ========================================================================== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+      #loader {
+        display: none !important;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      #loader, header, .ambient-glow, .grain-overlay,
+      .sticky-controls-wrap, .pinned-section, .empty-results-box,
+      .content-section, footer, .fixed-credit-pill, #toast-msg, .modal-overlay,
+      .copy-btn, .card-pin-btn, .card-link, .notice-banners {
+        display: none !important;
+      }
+      .services-grid {
+        display: block !important;
+      }
+      .service-card {
+        page-break-inside: avoid;
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        margin-bottom: 1rem;
+        padding: 0.75rem;
+      }
+      .card-service-num {
+        font-size: 1.5rem !important;
+        color: #000 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Screen reader & keyboard bypass -->
+  <a href="#search-input" class="skip-link" id="skip-link-text">Skip to search</a>
+
+  <!-- Paper grain & ambient glowing backgrounds -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+  <div class="ambient-glow" aria-hidden="true">
+    <div class="glow-orb glow-1"></div>
+    <div class="glow-orb glow-2"></div>
+    <div class="glow-orb glow-3"></div>
+  </div>
+
+  <!-- Real-time scroll indicator -->
+  <div class="scroll-progress-bar" id="scroll-bar" aria-hidden="true"></div>
+
+  <!-- SVG Symbols (Clean, Vector, Zero External Assets) -->
+  <svg style="display:none;" aria-hidden="true">
+    <defs>
+      <!-- Original Shield Logo Emblem -->
+      <g id="logo-emblem">
+        <path d="M32 4 C18 4 8 14 8 28 C8 46 24 56 32 60 C40 56 56 46 56 28 C56 14 46 4 32 4 Z" fill="url(#logoGrad)" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.6"/>
+        <path d="M30 18h4v24h-4zM20 28h24v4h-24z" fill="#ffffff" fill-opacity="0.85"/>
+        <path class="heartbeat-draw" d="M12 30h10l3-7 4 15 4-19 4 15 3-4h12" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <linearGradient id="logoGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1F7A4D"/>
+        <stop offset="100%" stop-color="#0B3D2E"/>
+      </linearGradient>
+
+      <!-- Standard UI Icons -->
+      <g id="icon-search"><path d="M21 21l-4.35-4.35M19 11a8 8 0 11-16 0 8 8 0 0116 0z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></g>
+      <g id="icon-close"><path d="M18 6L6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></g>
+      <g id="icon-sun"><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></g>
+      <g id="icon-moon"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      <g id="icon-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></g>
+      <g id="icon-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></g>
+      <g id="icon-ext-link"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      <g id="icon-share"><circle cx="18" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="19" r="3" fill="none" stroke="currentColor" stroke-width="2"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke="currentColor" stroke-width="2"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke="currentColor" stroke-width="2"/></g>
+      <g id="icon-print"><polyline points="6 9 6 2 18 2 18 9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2" fill="none" stroke="currentColor" stroke-width="2"/><rect x="6" y="14" width="12" height="8" fill="none" stroke="currentColor" stroke-width="2"/></g>
+      <g id="icon-arrow-up"><line x1="12" y1="19" x2="12" y2="5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polyline points="5 12 12 5 19 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      <g id="icon-menu"><line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></g>
+      <g id="icon-shield"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      <g id="icon-ambulance"><rect x="1" y="5" width="15" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 8h4l3 3v6h-7V8z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="5.5" cy="18.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18.5" cy="18.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="8" y1="9" x2="8" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="6" y1="11" x2="10" y2="11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></g>
+      <g id="icon-flame"><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      <g id="icon-bolt"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      <g id="icon-drop"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      <g id="icon-warning"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><line x1="12" y1="8" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="16" x2="12.01" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></g>
+      <g id="icon-check"><polyline points="20 6 9 17 4 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+    </defs>
+  </svg>
+
+  <!-- ========================================================================
+       LOADER SCREEN (Fast, strictly <0.9s, fully non-blocking)
+       ======================================================================== -->
+  <div id="loader" role="status" aria-live="polite">
+    <div class="loader-content">
+      <div class="loader-logo-wrap">
+        <svg viewBox="0 0 64 64" width="100%" height="100%"><use href="#logo-emblem"/></svg>
+      </div>
+      <h2 class="loader-title" id="loader-title-text">Punjab Emergency Help Hub</h2>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       FIRST-VISIT BILINGUAL MODAL DIALOG
+       ======================================================================== -->
+  <div class="modal-overlay" id="lang-modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+    <div class="modal-card glass-panel">
+      <div class="modal-logo">
+        <svg viewBox="0 0 64 64" width="100%" height="100%"><use href="#logo-emblem"/></svg>
+      </div>
+      <h2 class="modal-title" id="modal-heading">Choose your language<br>اپنی زبان منتخب کریں</h2>
+      <p class="modal-subtitle" id="modal-sub">Select your preferred interface language</p>
+      
+      <div class="lang-options-grid">
+        <button type="button" class="lang-choice-btn" id="choose-en" data-lang="en">
+          <span>English</span>
+          <span style="font-size: 0.8rem; font-weight: normal; color: var(--muted);">Default</span>
+        </button>
+        <button type="button" class="lang-choice-btn" id="choose-ur" data-lang="ur">
+          <span>اردو</span>
+          <span style="font-size: 0.8rem; font-weight: normal; color: var(--muted);">پاکستانی</span>
+        </button>
+      </div>
+
+      <button type="button" class="modal-skip-btn" id="modal-skip">Skip / جاری رکھیں (Esc)</button>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       HEADER
+       ======================================================================== -->
+  <header class="site-header glass-panel" id="site-header">
+    <div class="container header-inner">
+      <a href="#home" class="brand-wrap" aria-label="Punjab Emergency Help Hub">
+        <div class="brand-logo-badge">
+          <svg viewBox="0 0 64 64" width="32" height="32"><use href="#logo-emblem"/></svg>
+        </div>
+        <div class="brand-titles">
+          <span class="brand-name" data-i18n="siteTitle">Punjab Emergency Help Hub</span>
+          <span class="brand-region-pill" data-i18n="regionPill">Punjab, Pakistan</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="nav-desktop" aria-label="Main navigation">
+        <a href="#home" class="nav-link active" data-i18n="navHome">Home</a>
+        <a href="#services" class="nav-link" data-i18n="navServices">Services</a>
+        <a href="#how-to-call" class="nav-link" data-i18n="navCallGuide">How to call</a>
+        <a href="#departments" class="nav-link" data-i18n="navDepts">Departments</a>
+        <a href="#sources" class="nav-link" data-i18n="navSources">Sources</a>
+      </nav>
+
+      <!-- Right Action Controls -->
+      <div class="header-actions">
+        <!-- Search jump button -->
+        <button type="button" class="icon-btn" id="header-search-jump" title="Search (/)" aria-label="Jump to search">
+          <svg width="20" height="20"><use href="#icon-search"/></svg>
+        </button>
+
+        <!-- Language toggle button -->
+        <button type="button" class="lang-toggle-btn" id="header-lang-btn" aria-label="Toggle language">
+          <span id="header-lang-label">اردو</span>
+        </button>
+
+        <!-- Theme toggle button -->
+        <button type="button" class="icon-btn" id="theme-toggle-btn" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
+          <svg width="20" height="20" id="theme-icon"><use href="#icon-moon"/></svg>
+        </button>
+
+        <!-- Mobile hamburger menu -->
+        <button type="button" class="icon-btn hamburger-btn" id="hamburger-open" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-drawer">
+          <svg width="22" height="22"><use href="#icon-menu"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Side Sheet -->
+  <div class="mobile-drawer-overlay" id="mobile-drawer-overlay">
+    <div class="mobile-drawer glass-panel" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+      <div class="drawer-header">
+        <span class="brand-name" data-i18n="siteTitle">Punjab Emergency Help Hub</span>
+        <button type="button" class="icon-btn" id="hamburger-close" aria-label="Close menu">
+          <svg width="20" height="20"><use href="#icon-close"/></svg>
+        </button>
+      </div>
+      <nav class="drawer-nav">
+        <a href="#home" class="drawer-link" data-i18n="navHome">Home</a>
+        <a href="#services" class="drawer-link" data-i18n="navServices">Services</a>
+        <a href="#how-to-call" class="drawer-link" data-i18n="navCallGuide">How to call</a>
+        <a href="#departments" class="drawer-link" data-i18n="navDepts">Departments</a>
+        <a href="#sources" class="drawer-link" data-i18n="navSources">Sources</a>
+      </nav>
+      <div class="drawer-controls">
+        <button type="button" class="footer-btn" id="drawer-lang-btn" style="color:var(--ink); border-color:var(--border-subtle); justify-content:center;">
+          <span id="drawer-lang-label">Switch to اردو</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <!-- ======================================================================
+         HERO SECTION (Includes 1122 & 15 Priority Panels)
+         ====================================================================== -->
+    <section class="hero-section container" id="home">
+      <h1 class="hero-title" data-i18n="heroTitle">Emergency numbers for Punjab, in one place.</h1>
+      <p class="hero-subtitle" data-i18n="heroSubtitle">Verified emergency and public assistance helplines across the province. Tap copy to save or dial directly.</p>
+
+      <!-- Primary Big Glass Panels (1122 & 15) -->
+      <div class="hero-priority-grid">
+        <div class="hero-panel glass-panel">
+          <div class="hero-panel-title">
+            <svg width="20" height="20" style="color:var(--mid-green)"><use href="#icon-ambulance"/></svg>
+            <span data-i18n="hero1122Title">Rescue 1122</span>
+          </div>
+          <div class="hero-panel-num service-number pulse-subtle">1122</div>
+          <div class="hero-panel-desc" data-i18n="hero1122Desc">Ambulance, Fire & Disaster Rescue</div>
+          <button type="button" class="copy-btn" data-copy="1122" aria-label="Copy Rescue 1122">
+            <svg width="18" height="18"><use href="#icon-copy"/></svg>
+            <span data-i18n="copyNum">Copy number</span>
+          </button>
+        </div>
+
+        <div class="hero-panel glass-panel">
+          <div class="hero-panel-title">
+            <svg width="20" height="20" style="color:var(--mid-green)"><use href="#icon-shield"/></svg>
+            <span data-i18n="hero15Title">Police Madadgar</span>
+          </div>
+          <div class="hero-panel-num service-number">15</div>
+          <div class="hero-panel-desc" data-i18n="hero15Desc">Emergency Crime, Safety & Response</div>
+          <button type="button" class="copy-btn" data-copy="15" aria-label="Copy Police 15">
+            <svg width="18" height="18"><use href="#icon-copy"/></svg>
+            <span data-i18n="copyNum">Copy number</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Safety Notice Banners -->
+      <div class="notice-banners">
+        <div class="notice-banner notice-danger" role="alert">
+          <svg width="22" height="22" style="flex-shrink:0;"><use href="#icon-warning"/></svg>
+          <span data-i18n="lifeWarning">For life-threatening emergencies, contact the appropriate emergency service immediately.</span>
+        </div>
+        <div class="notice-banner notice-neutral">
+          <svg width="22" height="22" style="flex-shrink:0;"><use href="#icon-warning"/></svg>
+          <span data-i18n="changeNotice">Emergency numbers can change. Please verify them with official Punjab Government sources.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SEARCH & CATEGORY BAR (STICKY)
+         ====================================================================== -->
+    <section class="sticky-controls-wrap glass-panel" id="services" aria-label="Search and filter services">
+      <div class="container">
+        <!-- Search Box -->
+        <div class="search-box-container">
+          <span class="search-icon-pos">
+            <svg width="22" height="22"><use href="#icon-search"/></svg>
+          </span>
+          <input
+            type="search"
+            id="search-input"
+            class="search-input-field"
+            placeholder="What emergency service do you need? (e.g., 1122, police, fire, bijli, pani...)"
+            aria-label="What emergency service do you need?"
+            autocomplete="off"
+            spellcheck="false"
+          >
+          <button type="button" class="search-clear-btn" id="search-clear" aria-label="Clear search">
+            <svg width="18" height="18"><use href="#icon-close"/></svg>
+          </button>
+        </div>
+
+        <!-- Filter Chips Row -->
+        <div class="chips-scroll-row" id="category-chips-row" role="radiogroup" aria-label="Service categories">
+          <!-- Dynamically populated chips -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SERVICES GRID & RESULTS
+         ====================================================================== -->
+    <div class="container">
+      <!-- Pinned Cards Row ("My Numbers") -->
+      <section class="pinned-section" id="pinned-section">
+        <div class="pinned-header">
+          <h2 class="pinned-title">
+            <svg width="20" height="20" style="color:#EAAA08;"><use href="#icon-star"/></svg>
+            <span data-i18n="pinnedTitle">My Pinned Numbers</span>
+          </h2>
+          <button type="button" class="clear-pins-btn" id="clear-all-pins" data-i18n="clearPins">Clear all</button>
+        </div>
+        <div class="services-grid" id="pinned-cards-grid">
+          <!-- Dynamically rendered pinned cards -->
+        </div>
+      </section>
+
+      <!-- Result Count Status for Accessibility -->
+      <div class="results-status-bar">
+        <span id="results-count-text" aria-live="polite">Showing all services</span>
+        <span id="hotkey-tip" style="font-size:0.78rem; opacity:0.75;">Press '/' to search</span>
+      </div>
+
+      <!-- Main Services Grid -->
+      <section class="services-grid" id="services-grid" aria-label="Emergency Services Grid">
+        <!-- Dynamically populated cards -->
+      </section>
+
+      <!-- Friendly Empty State -->
+      <div class="empty-results-box" id="empty-state">
+        <svg width="48" height="48" style="color:var(--muted); margin-bottom:0.75rem;"><use href="#icon-search"/></svg>
+        <h3 class="empty-title" data-i18n="noResults">No matching emergency services found</h3>
+        <p style="color:var(--muted); font-size:0.95rem;" data-i18n="trySearching">Try searching for:</p>
+        <div class="empty-suggestions" id="empty-suggestions">
+          <!-- Clickable search suggestions -->
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           "WHAT TO SAY WHEN YOU CALL" SECTION
+           ==================================================================== -->
+      <section class="content-section" id="how-to-call">
+        <h2 class="section-title" data-i18n="guideTitle">What to say when you call</h2>
+        <p class="section-desc" data-i18n="guideSubtitle">Stay calm and follow this standard sequence to get help as fast as possible:</p>
+
+        <ol class="guide-steps-list">
+          <li class="guide-step-item">
+            <div class="step-number-badge">1</div>
+            <div class="step-text" data-i18n="guideStep1">State what happened clearly (accident, crime, medical emergency, fire).</div>
+          </li>
+          <li class="guide-step-item">
+            <div class="step-number-badge">2</div>
+            <div class="step-text" data-i18n="guideStep2">Give your exact location, street name, and an easily recognized landmark.</div>
+          </li>
+          <li class="guide-step-item">
+            <div class="step-number-badge">3</div>
+            <div class="step-text" data-i18n="guideStep3">State how many people are hurt, trapped, or in danger.</div>
+          </li>
+          <li class="guide-step-item">
+            <div class="step-number-badge">4</div>
+            <div class="step-text" data-i18n="guideStep4">Provide your full name and an active contact number.</div>
+          </li>
+          <li class="guide-step-item">
+            <div class="step-number-badge">5</div>
+            <div class="step-text" data-i18n="guideStep5">Stay on the line until the operator explicitly instructs you to hang up.</div>
+          </li>
+        </ol>
+
+        <div class="notice-banner notice-neutral" style="margin-top:1rem;">
+          <svg width="22" height="22" style="flex-shrink:0;"><use href="#icon-warning"/></svg>
+          <span data-i18n="guideWarning">Do not call emergency lines for non-emergencies. It delays help for people in danger.</span>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           DEPARTMENTS & OFFICIAL WEBSITES
+           ==================================================================== -->
+      <section class="content-section" id="departments">
+        <h2 class="section-title" data-i18n="deptsTitle">Departments and Official Websites</h2>
+        <p class="section-desc" data-i18n="deptsSubtitle">Official government portals and verified authority resources across Punjab.</p>
+
+        <div class="depts-grid" id="depts-grid">
+          <!-- Dynamically populated official department cards -->
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SOURCES & VERIFICATION
+           ==================================================================== -->
+      <section class="content-section" id="sources">
+        <h2 class="section-title" data-i18n="sourcesTitle">Sources and Verification</h2>
+        <p class="section-desc" data-i18n="sourcesDesc">All helpline numbers listed on this hub are cross-referenced with Punjab Government portals, Punjab Safe Cities Authority publications, and relevant department communications as of 3 October 2026.</p>
+        <p style="font-size:0.9rem; color:var(--muted);">
+          Reference portal: <a href="https://punjab.gov.pk/" target="_blank" rel="noopener noreferrer" class="card-link">https://punjab.gov.pk/ <svg width="14" height="14"><use href="#icon-ext-link"/></svg></a>
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       RICH FOOTER
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1: Brand Info -->
+        <div>
+          <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+            <svg viewBox="0 0 64 64" width="36" height="36"><use href="#logo-emblem"/></svg>
+            <span style="font-weight:700; font-size:1.15rem;" data-i18n="siteTitle">Punjab Emergency Help Hub</span>
+          </div>
+          <p style="font-size:0.9rem; color:rgba(255,255,255,0.78); line-height:1.6; margin-bottom:1.25rem;" data-i18n="footerAbout">
+            An independent, civic emergency contact reference directory for residents and visitors of Punjab, Pakistan.
+          </p>
+          <button type="button" class="footer-btn" id="footer-lang-btn">
+            <span id="footer-lang-label">اردو</span>
+          </button>
+        </div>
+
+        <!-- Col 2: Navigation Links -->
+        <div>
+          <div class="footer-col-title" data-i18n="quickLinks">Quick Links</div>
+          <ul class="footer-links-list">
+            <li><a href="#home" data-i18n="navHome">Home</a></li>
+            <li><a href="#services" data-i18n="navServices">Services</a></li>
+            <li><a href="#how-to-call" data-i18n="navCallGuide">How to call</a></li>
+            <li><a href="#departments" data-i18n="navDepts">Departments</a></li>
+            <li><a href="#sources" data-i18n="navSources">Sources</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Key Numbers (Plain text with small copy) -->
+        <div>
+          <div class="footer-col-title" data-i18n="topNumbers">Key Numbers</div>
+          <ul class="footer-numbers-list">
+            <li class="footer-num-row">
+              <span>Rescue 1122</span>
+              <div style="display:flex; align-items:center; gap:0.4rem;">
+                <strong class="ltr-num">1122</strong>
+                <button type="button" class="footer-small-copy" data-copy="1122" aria-label="Copy 1122"><svg width="14" height="14"><use href="#icon-copy"/></svg></button>
+              </div>
+            </li>
+            <li class="footer-num-row">
+              <span>Police Madadgar</span>
+              <div style="display:flex; align-items:center; gap:0.4rem;">
+                <strong class="ltr-num">15</strong>
+                <button type="button" class="footer-small-copy" data-copy="15" aria-label="Copy 15"><svg width="14" height="14"><use href="#icon-copy"/></svg></button>
+              </div>
+            </li>
+            <li class="footer-num-row">
+              <span>Fire Brigade</span>
+              <div style="display:flex; align-items:center; gap:0.4rem;">
+                <strong class="ltr-num">16</strong>
+                <button type="button" class="footer-small-copy" data-copy="16" aria-label="Copy 16"><svg width="14" height="14"><use href="#icon-copy"/></svg></button>
+              </div>
+            </li>
+            <li class="footer-num-row">
+              <span>Women's Helpline</span>
+              <div style="display:flex; align-items:center; gap:0.4rem;">
+                <strong class="ltr-num">1043</strong>
+                <button type="button" class="footer-small-copy" data-copy="1043" aria-label="Copy 1043"><svg width="14" height="14"><use href="#icon-copy"/></svg></button>
+              </div>
+            </li>
+            <li class="footer-num-row">
+              <span>Child Protection</span>
+              <div style="display:flex; align-items:center; gap:0.4rem;">
+                <strong class="ltr-num">1121</strong>
+                <button type="button" class="footer-small-copy" data-copy="1121" aria-label="Copy 1121"><svg width="14" height="14"><use href="#icon-copy"/></svg></button>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Official Portals -->
+        <div>
+          <div class="footer-col-title" data-i18n="officialWebsites">Official Portals</div>
+          <ul class="footer-links-list">
+            <li><a href="https://rescue.gov.pk/" target="_blank" rel="noopener noreferrer">Rescue 1122 Punjab</a></li>
+            <li><a href="https://punjabpolice.gov.pk/" target="_blank" rel="noopener noreferrer">Punjab Police</a></li>
+            <li><a href="https://nhmp.gov.pk/" target="_blank" rel="noopener noreferrer">Motorway Police (NH&MP)</a></li>
+            <li><a href="https://punjab.gov.pk/" target="_blank" rel="noopener noreferrer">Government of Punjab Portal</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Action Utility Buttons -->
+      <div class="footer-action-buttons">
+        <button type="button" class="footer-btn" id="share-site-btn">
+          <svg width="16" height="16"><use href="#icon-share"/></svg>
+          <span data-i18n="shareBtn">Share this site</span>
+        </button>
+        <button type="button" class="footer-btn" id="print-site-btn">
+          <svg width="16" height="16"><use href="#icon-print"/></svg>
+          <span data-i18n="printBtn">Print numbers</span>
+        </button>
+        <button type="button" class="footer-btn" id="back-to-top-btn" style="margin-inline-start:auto;">
+          <svg width="16" height="16"><use href="#icon-arrow-up"/></svg>
+          <span data-i18n="backToTop">Back to top</span>
+        </button>
+      </div>
+
+      <!-- Bottom Disclaimer Bar -->
+      <div class="footer-bottom">
+        <p data-i18n="disclaimer">
+          Disclaimer: This is an independent civic information platform, not run by the Government of the Punjab. Emergency numbers were verified on 3 October 2026 and should always be confirmed with official sources.
+        </p>
+        <div style="white-space:nowrap; font-weight:700;">
+          Developed by Ehtisham
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Fixed Credit Pill Watermark -->
+  <div class="fixed-credit-pill" aria-hidden="true">
+    Developed by Ehtisham
+  </div>
+
+  <!-- Accessible Toast Popup -->
+  <div id="toast-msg" class="glass-panel" role="status" aria-live="polite">
+    <svg width="18" height="18" style="color:var(--bright-accent);"><use href="#icon-check"/></svg>
+    <span id="toast-text">Copied to clipboard</span>
+  </div>
+
+  <!-- ========================================================================
+       JAVASCRIPT APPLICATION CODE
+       ======================================================================== -->
+  <script>
+    /**
+     * ====================================================================
+     * 1. EDITABLE DATA OBJECTS
+     * ====================================================================
+     * HOW TO ADD A NEW EMERGENCY SERVICE:
+     * Simply insert a new object into the EMERGENCY_SERVICES array below:
+     * {
+     *   id: "unique-slug",
+     *   category: "ambulance" | "police" | "fire" | "hospitals" | "rescue" | "highway" | "electricity" | "water" | "women" | "child" | "other",
+     *   icon: "icon-svg-id",
+     *   number: "0000",
+     *   verifiedDate: "3 October 2026",
+     *   source: "Official Department Name",
+     *   website: "https://example.gov.pk/" or null,
+     *   keywords: ["alias1", "alias2", "roman-urdu"],
+     *   en: { name: "...", desc: "...", whenToUse: "..." },
+     *   ur: { name: "...", desc: "...", whenToUse: "..." }
+     * }
+     */
+
+    const EMERGENCY_SERVICES = [
+      {
+        id: "rescue-1122",
+        category: "rescue",
+        icon: "icon-ambulance",
+        number: "1122",
+        verifiedDate: "3 October 2026",
+        source: "Punjab Emergency Service",
+        website: "https://rescue.gov.pk/",
+        keywords: ["rescue", "ambulance", "fire", "emergency", "1122", "haadsa", "aag", "emrensi", "hospital"],
+        en: {
+          name: "Rescue 1122 (Ambulance, Fire & Rescue)",
+          desc: "Primary emergency response across Punjab for medical emergencies, fires, building collapse, and water rescue. (Complaints: 1192)",
+          whenToUse: "Immediate life threats, medical emergencies, traffic crashes, and active fire outbreaks."
+        },
+        ur: {
+          name: "ریسکیو 1122 (ایمبولینس، فائر و ریسکیو)",
+          desc: "پنجاب بھر میں طبی ایمرجنسی، آگ لگنے، حادثات اور قدرتی آفات کے لیے بنیادی ایمرجنسی سروس۔ (شکایات و فیڈ بیک: 1192)",
+          whenToUse: "جان لیوا خطرات، شدید بیماری یا چوٹ، ٹریفک حادثات اور آگ لگنے کے فوری واقعات۔"
+        }
+      },
+      {
+        id: "police-15",
+        category: "police",
+        icon: "icon-shield",
+        number: "15",
+        verifiedDate: "3 October 2026",
+        source: "Punjab Police & PSCA",
+        website: "https://punjabpolice.gov.pk/",
+        keywords: ["police", "crime", "15", "chor", "daku", "thana", "madadgar", "security"],
+        en: {
+          name: "Police Madadgar",
+          desc: "Immediate law enforcement, crime response, anti-social disturbance, and public safety helpline.",
+          whenToUse: "Robbery, theft, ongoing violence, suspicious activity, or direct threat to personal safety."
+        },
+        ur: {
+          name: "پولیس مددگار 15",
+          desc: "صوبہ پنجاب میں امن و امان، جرائم کی روک تھام اور ہنگامی پولیس مدد کے لیے مرکزی ہیلپ لائن۔",
+          whenToUse: "ڈکیتی، چوری، لڑائی جھگڑا، مشکوک سرگرمی یا جان و مال کو فوری خطرے کی صورت میں۔"
+        }
+      },
+      {
+        id: "fire-16",
+        category: "fire",
+        icon: "icon-flame",
+        number: "16",
+        verifiedDate: "3 October 2026",
+        source: "City District Fire Brigade",
+        website: "https://lahore.punjab.gov.pk/index.php/node/102",
+        keywords: ["fire", "16", "aag", "firebrigade", "dhamaka", "rescue"],
+        en: {
+          name: "Fire Brigade",
+          desc: "Municipal fire department response line. Note: For unified coordinated response, Rescue 1122 can also deploy fire engines directly.",
+          whenToUse: "Urban fires, factory blazes, short circuits causing fires, and chemical fire hazards."
+        },
+        ur: {
+          name: "فائر بریگیڈ",
+          desc: "شہری فائر سروس ہیلپ لائن۔ یاد رہے کہ ریسکیو 1122 بھی فائر ٹینڈرز فوری روانہ کرتا ہے۔",
+          whenToUse: "گھروں، دکانوں، فیکٹریوں یا گاڑیوں میں آگ لگنے کی ایمرجنسی میں۔"
+        }
+      },
+      {
+        id: "edhi-115",
+        category: "ambulance",
+        icon: "icon-ambulance",
+        number: "115",
+        verifiedDate: "3 October 2026",
+        source: "Edhi Foundation Pakistan",
+        website: "https://punjab.gov.pk/",
+        keywords: ["edhi", "ambulance", "115", "mayyat", "patient", "transport"],
+        en: {
+          name: "Edhi Ambulance Service",
+          desc: "Nationwide non-profit emergency patient transport and relief foundation.",
+          whenToUse: "Inter-hospital patient shifts, trauma transfer, and emergency dead body transportation."
+        },
+        ur: {
+          name: "ایدھی ایمبولینس سروس",
+          desc: "ملک گیر فلاحی مریض و میت ٹرانسپورٹ ایمبولینس سروس۔",
+          whenToUse: "ہسپتالوں کے درمیان مریض منتقلی، ایمرجنسی طبی ٹرانسپورٹ اور میت کی منتقلی کے لیے۔"
+        }
+      },
+      {
+        id: "healthline-0800",
+        category: "hospitals",
+        icon: "icon-ambulance",
+        number: "0800-99000",
+        verifiedDate: "3 October 2026",
+        source: "Primary & Secondary Healthcare Dept",
+        website: "https://punjab.gov.pk/",
+        keywords: ["health", "doctor", "hospital", "sehat", "dawa", "ilaj", "tibbi"],
+        en: {
+          name: "Punjab Health Line",
+          desc: "Medical advice, health facility information, and public hospital guidance. (Not an ambulance; call 1122 for critical emergencies).",
+          whenToUse: "Non-critical medical questions, hospital availability, medicine inquiries, or healthcare complaints."
+        },
+        ur: {
+          name: "پنجاب ہیلتھ لائن (صحت سہولت)",
+          desc: "طبی مشورہ، ہسپتالوں کی رہنمائی اور صحت شکایات۔ (یہ ایمبولینس نہیں ہے؛ فوری ایمرجنسی میں 1122 ملائیں)۔",
+          whenToUse: "عام طبی رہنمائی، قریبی سرکاری ہسپتال کی معلومات اور ادویات سے متعلق معلومات۔"
+        }
+      },
+      {
+        id: "pdma-1129",
+        category: "rescue",
+        icon: "icon-shield",
+        number: "1129",
+        verifiedDate: "3 October 2026",
+        source: "Provincial Disaster Management Authority",
+        website: "https://punjab.gov.pk/",
+        keywords: ["pdma", "flood", "sailab", "disaster", "earthquake", "zelzela", "barish"],
+        en: {
+          name: "PDMA Disaster & Flood Helpline",
+          desc: "Provincial disaster monitoring, flood warnings, emergency shelter, and relief coordination.",
+          whenToUse: "River flooding, urban monsoon flooding alerts, heavy storm damage, or disaster assistance."
+        },
+        ur: {
+          name: "پی ڈی ایم اے قدرتی آفات و سیلاب ہیلپ لائن",
+          desc: "صوبائی ڈیزاسٹر مینجمنٹ اتھارٹی: سیلاب، زلزلہ اور قدرتی آفات میں ریلیف و الرٹس۔",
+          whenToUse: "سیلابی ریلوں کی اطلاع، طوفانی بارشوں کے نقصانات اور آفات کے دوران ہنگامی ریلیف۔"
+        }
+      },
+      {
+        id: "motorway-130",
+        category: "highway",
+        icon: "icon-shield",
+        number: "130",
+        verifiedDate: "3 October 2026",
+        source: "National Highways & Motorway Police",
+        website: "https://nhmp.gov.pk/",
+        keywords: ["motorway", "highway", "130", "nhmp", "m2", "m3", "m4", "m5", "gt road", "accident"],
+        en: {
+          name: "Motorway Police (NH&MP)",
+          desc: "Emergency assistance, breakdown support, traffic status, and fog/weather guidance across all Motorways and National Highways.",
+          whenToUse: "Vehicle breakdown, accidents, tyre punctures, or emergencies on M-2, M-3, M-4, M-5, M-11, and GT Road."
+        },
+        ur: {
+          name: "موٹروے پولیس (NH&MP)",
+          desc: "موٹرویز اور قومی شاہراہوں پر خرابی، حادثات، دھند کی صورتحال اور فوری مدد کے لیے ہیلپ لائن۔",
+          whenToUse: "موٹروے یا جی ٹی روڈ پر گاڑی خراب ہونے، ٹریفک حادثے یا سفر کے دوران ہنگامی مدد کے لیے۔"
+        }
+      },
+      {
+        id: "electricity-118",
+        category: "electricity",
+        icon: "icon-bolt",
+        number: "118",
+        verifiedDate: "3 October 2026",
+        source: "Ministry of Energy & Distribution Co.",
+        website: "https://punjab.gov.pk/",
+        keywords: ["bijli", "electricity", "118", "lesco", "fepco", "mepco", "gepco", "iesco", "current", "wire"],
+        en: {
+          name: "Electricity Complaints Helpline",
+          desc: "Unified complaint helpline for regional electricity distributors (LESCO, FECO, MEPCO, GEPCO, IESCO).",
+          whenToUse: "Fallen live wires, transformer bursts, hazardous electric poles, or extended localized outages."
+        },
+        ur: {
+          name: "بجلی ایمرجنسی شکایات (118)",
+          desc: "پنجاب کی تمام بجلی کمپنیوں (لیسکو، گیپکو، فیسکو، میپکو، آئیسکو) کی مرکزی ہیلپ لائن۔",
+          whenToUse: "بجلی کی ننگی تاریں گرنے، ٹرانسفارمر بلاسٹ، خطرناک پولز یا طویل بجلی بندش کی شکایت۔"
+        }
+      },
+      {
+        id: "wasa-1334",
+        category: "water",
+        icon: "icon-drop",
+        number: "1334",
+        verifiedDate: "3 October 2026",
+        source: "Water & Sanitation Agency (WASA)",
+        website: "https://punjab.gov.pk/",
+        keywords: ["wasa", "pani", "water", "sewerage", "gutter", "drain", "pipe", "line"],
+        en: {
+          name: "WASA Water & Sewerage Helpline",
+          desc: "Emergency water supply interruption, major pipe bursts, and street sewerage overflowing.",
+          whenToUse: "Main water supply bursts, open manholes posing danger, and heavy street drainage choking."
+        },
+        ur: {
+          name: "واسا واٹر اینڈ سیوریج ہیلپ لائن (1334)",
+          desc: "پانی کی فراہمی میں تعطل، مین پائپ لائن پھٹنے اور سیوریج گٹر ابلنے کے مسائل کے لیے۔",
+          whenToUse: "گلیوں میں گٹر ابلنے، مین ہول کے کھلے ڈھکن یا پینے کے پانی کی بڑی لائن لیک ہونے پر۔"
+        }
+      },
+      {
+        id: "women-1043",
+        category: "women",
+        icon: "icon-shield",
+        number: "1043",
+        verifiedDate: "3 October 2026",
+        source: "Punjab Commission on Status of Women",
+        website: "https://pcsw.punjab.gov.pk/node/44",
+        keywords: ["women", "aurat", "tashaddud", "violence", "harassment", "khawateen", "help"],
+        en: {
+          name: "Punjab Women's Helpline",
+          desc: "Toll-free helpline providing legal advice, harassment assistance, domestic abuse rescue, and shelter guidance for women.",
+          whenToUse: "Workplace or public harassment, domestic violence, forced marriage threats, or family legal distress."
+        },
+        ur: {
+          name: "پنجاب خواتین ہیلپ لائن (1043)",
+          desc: "خواتین پر تشدد، ہراسانی، گھریلو تنازعات اور مفت قانونی رہنمائی کے لیے وقف ہیلپ لائن۔",
+          whenToUse: "کام کی جگہ یا عوامی مقام پر ہراسگی، گھریلو تشدد، زبردستی شادی یا قانونی مدد کی ضرورت پر۔"
+        }
+      },
+      {
+        id: "child-1121",
+        category: "child",
+        icon: "icon-shield",
+        number: "1121",
+        verifiedDate: "3 October 2026",
+        source: "Child Protection & Welfare Bureau (CPWB)",
+        website: "https://punjab.gov.pk/",
+        keywords: ["child", "bacha", "gumshuda", "lost", "abuse", "labor", "yatim"],
+        en: {
+          name: "Child Protection & Welfare Bureau",
+          desc: "State protection for missing, runaway, physically abused, abandoned, or destitute children.",
+          whenToUse: "Reporting lost or abandoned children, severe child labor, child abuse, or child begging cartels."
+        },
+        ur: {
+          name: "چائلڈ پروٹیکشن اینڈ ویلفیئر بیورو (1121)",
+          desc: "گمشدہ، لاوارث، تشدد کے شکار اور بے سہارا بچوں کے تحفظ کے لیے پنجاب حکومت کا ادارہ۔",
+          whenToUse: "گمشدہ یا لاوارث بچہ ملنے، کم سن بچوں پر تشدد یا جبری مشقت اور بھیک منگوانے کی اطلاع پر۔"
+        }
+      },
+      {
+        id: "madadgaar-1098",
+        category: "child",
+        icon: "icon-shield",
+        number: "1098",
+        verifiedDate: "3 October 2026",
+        source: "Madadgaar National Helpline",
+        website: "https://punjab.gov.pk/",
+        keywords: ["madadgaar", "children", "women", "rights", "crisis", "counseling"],
+        en: {
+          name: "Madadgaar National Helpline",
+          desc: "National crisis helpline offering psychological counseling, crisis intervention, and legal assistance for children and women.",
+          whenToUse: "Crisis counseling, child abuse distress, or emergency legal advice for vulnerable persons."
+        },
+        ur: {
+          name: "مددگار نیشنل ہیلپ لائن (1098)",
+          desc: "بچوں اور خواتین کے لیے بحرانی مدد، نفسیاتی کونسلنگ اور قانونی رہنمائی کی ہیلپ لائن۔",
+          whenToUse: "بحرانی حالات، ذہنی دباؤ اور بچوں و خواتین کے حقوق سے متعلق قانونی رہنمائی کے لیے۔"
+        }
+      },
+      {
+        id: "lwmc-1139",
+        category: "other",
+        icon: "icon-drop",
+        number: "1139",
+        verifiedDate: "3 October 2026",
+        source: "Lahore Waste Management Company",
+        website: "https://lahore.punjab.gov.pk/index.php/node/102",
+        keywords: ["lwmc", "safai", "kachra", "kura", "waste", "cleaning", "lahore"],
+        en: {
+          name: "Lahore Waste Management Company (LWMC)",
+          desc: "Solid waste management, emergency roadside cleanup, animal offal disposal, and sanitation complaints in Lahore.",
+          whenToUse: "Massive solid waste accumulation, dead animal disposal, or uncleaned public streets."
+        },
+        ur: {
+          name: "لاہور ویسٹ مینجمنٹ کمپنی (1139)",
+          desc: "لاہور میں کوڑا کرکٹ اٹھانے، صفائی کی شکایات اور آلائشیں ٹھکانے لگانے کا ادارہ۔",
+          whenToUse: "گلی یا محلے میں کچرے کے ڈھیر، مردہ جانور اٹھوانے یا صفائی نہ ہونے کی شکایت پر۔"
+        }
+      },
+      {
+        id: "ctd-0800",
+        category: "police",
+        icon: "icon-shield",
+        number: "0800-111-11",
+        verifiedDate: "3 October 2026",
+        source: "Counter Terrorism Department (CTD)",
+        website: "https://punjabpolice.gov.pk/",
+        keywords: ["ctd", "terror", "dehshatgardi", "bomb", "hate speech", "intelligence"],
+        en: {
+          name: "Counter Terrorism Department (CTD)",
+          desc: "Toll-free intelligence helpline to report terrorist threats, explosive devices, hate material, and extremist activities.",
+          whenToUse: "Suspicious unattended luggage, extremist hate propaganda, or suspected terror plotting."
+        },
+        ur: {
+          name: "کاؤنٹر ٹیررازم ڈیپارٹمنٹ (CTD لاہور)",
+          desc: "دہشت گردی کی روک تھام، کالعدم سرگرمیوں اور مشکوک عناصر کی خفیہ اطلاع دینے کی ہیلپ لائن۔",
+          whenToUse: "لاوارث بیگ، بارودی مواد، نفرت انگیز لٹریچر یا دہشت گردی کے ممکنہ خطرے کی اطلاع کے لیے۔"
+        }
+      },
+      {
+        id: "traffic-1915",
+        category: "highway",
+        icon: "icon-shield",
+        number: "1915",
+        verifiedDate: "3 October 2026",
+        source: "City Traffic Police Lahore (Rasta)",
+        website: "https://psca.gop.pk/",
+        keywords: ["traffic", "jam", "rasta", "challan", "license", "road", "1915"],
+        en: {
+          name: "Road & Traffic Awareness (1915)",
+          desc: "Live road congestions, diversion alerts, driving licensing support, and traffic warden assistance.",
+          whenToUse: "Severe road gridlocks, signal outages, broken down vehicles blocking traffic, or licensing queries."
+        },
+        ur: {
+          name: "ٹریفک ہیلپ لائن و رہنمائی (1915 راستہ)",
+          desc: "شہر میں ٹریفک جام، متبادل راستوں کی معلومات، ڈرائیونگ لائسنس اور ٹریفک وارڈن کی مدد۔",
+          whenToUse: "بڑے ٹریفک جام میں پھنسنے، ٹریفک سگنل خراب ہونے یا راستہ پوچھنے کے لیے۔"
+        }
+      },
+      {
+        id: "livestock-0800",
+        category: "other",
+        icon: "icon-shield",
+        number: "0800-78686",
+        verifiedDate: "3 October 2026",
+        source: "Punjab Livestock & Dairy Development",
+        website: "https://punjab.gov.pk/",
+        keywords: ["livestock", "janwar", "cow", "goat", "vet", "doctor", "disease", "farm"],
+        en: {
+          name: "Punjab Livestock Helpline",
+          desc: "Toll-free veterinary assistance, cattle disease outbreak reporting, and emergency veterinary mobile unit requests.",
+          whenToUse: "Sudden livestock epidemics, animal disease vaccination inquiries, or emergency veterinary care."
+        },
+        ur: {
+          name: "پنجاب لائیو اسٹاک ہیلپ لائن (0800-78686)",
+          desc: "مویشیوں کی بیماریوں، جانوروں کے علاج اور ویٹرنری ڈاکٹر کی رہنمائی کے لیے مفت ہیلپ لائن۔",
+          whenToUse: "مویشیوں میں وبا پھیلنے، ہنگامی ویٹرنری مشورے یا حفاظتی ٹیکہ جات کی معلومات کے لیے۔"
+        }
+      }
+    ];
+
+    /**
+     * Categories list with English and Urdu labels
+     */
+    const CATEGORIES = [
+      { id: "all", en: "All", ur: "سب" },
+      { id: "ambulance", en: "Ambulance", ur: "ایمبولینس" },
+      { id: "police", en: "Police", ur: "پولیس" },
+      { id: "fire", en: "Fire", ur: "فائر بریگیڈ" },
+      { id: "hospitals", en: "Hospitals", ur: "ہسپتال" },
+      { id: "rescue", en: "Rescue", ur: "ریسکیو" },
+      { id: "highway", en: "Highway", ur: "ہائی وے" },
+      { id: "electricity", en: "Electricity", ur: "بجلی" },
+      { id: "water", en: "Water", ur: "پانی" },
+      { id: "women", en: "Women", ur: "خواتین" },
+      { id: "child", en: "Child", ur: "بچے" },
+      { id: "other", en: "Other", ur: "دیگر" }
+    ];
+
+    /**
+     * Official Departments Directory (Section 9 & 12)
+     */
+    const DEPARTMENTS = [
+      {
+        en: { name: "Punjab Emergency Service (Rescue 1122)", desc: "Lead emergency ambulance, fire and disaster service." },
+        ur: { name: "پنجاب ایمرجنسی سروس (ریسکیو 1122)", desc: "صوبہ پنجاب کا مرکزی ایمبولینس، فائر اور ریسکیو ادارہ۔" },
+        url: "https://rescue.gov.pk/"
+      },
+      {
+        en: { name: "Punjab Police", desc: "Law enforcement and public crime prevention agency." },
+        ur: { name: "پنجاب پولیس", desc: "صوبے میں امن و امان اور انصاف کی فراہمی کا پولیس ادارہ۔" },
+        url: "https://punjabpolice.gov.pk/"
+      },
+      {
+        en: { name: "Punjab Safe Cities Authority (PSCA)", desc: "Integrated smart surveillance & Emergency 15 command centers." },
+        ur: { name: "پنجاب سیف سٹیز اتھارٹی (PSCA)", desc: "جدید کیمرہ مانیٹرنگ اور پکار 15 کمانڈ اینڈ کنٹرول سینٹرز۔" },
+        url: "https://psca.gop.pk/"
+      },
+      {
+        en: { name: "National Highways & Motorway Police", desc: "Federal traffic regulation, patrol, and emergency roadside help." },
+        ur: { name: "نیشنل ہائی ویز اینڈ موٹروے پولیس", desc: "موٹروے اور قومی شاہراہوں پر ٹریفک تحفظ و ہنگامی مدد۔" },
+        url: "https://nhmp.gov.pk/"
+      },
+      {
+        en: { name: "Punjab Commission on Status of Women", desc: "Protecting women's fundamental rights and legal helpline." },
+        ur: { name: "پنجاب کمیشن برائے وقارِ نسواں (1043)", desc: "خواتین کے قانونی حقوق اور تحفظ کے لیے صوبائی ادارہ۔" },
+        url: "https://pcsw.punjab.gov.pk/node/44"
+      },
+      {
+        en: { name: "Women Development Department", desc: "Provincial initiatives and women empowerment helplines." },
+        ur: { name: "محکمہ بہبود و ترقی خواتین", desc: "خواتین کی خود مختاری اور فلاح کے لیے صوبائی محکمہ۔" },
+        url: "https://wdd.punjab.gov.pk/helpline"
+      },
+      {
+        en: { name: "Lahore District Administration", desc: "District helplines, control rooms, and municipal services." },
+        ur: { name: "ضلعی انتظامیہ لاہور", desc: "ضلعی ہیلپ لائنز، شکایات سیل اور شہری سہولیات۔" },
+        url: "https://lahore.punjab.gov.pk/index.php/node/102"
+      },
+      {
+        en: { name: "Chief Minister's Office, Punjab", desc: "Direct complaint portal and provincial governance cell." },
+        ur: { name: "وزیر اعلیٰ پنجاب سیکرٹریٹ", desc: "شکایات پورٹل اور عوامی مسائل کے فوری حل کے لیے سیل۔" },
+        url: "https://cm.punjab.gov.pk/"
+      },
+      {
+        en: { name: "Government of the Punjab", desc: "Main portal, department directory, and provincial services." },
+        ur: { name: "حکومتِ پنجاب (مرکزی پورٹل)", desc: "پنجاب حکومت کا آفیشل پورٹل اور تمام سرکاری محکموں کی ڈائریکٹری۔" },
+        url: "https://punjab.gov.pk/"
+      }
+    ];
+
+    /**
+     * UI Translations Dictionary (Strict bilingual compliance)
+     */
+    const I18N = {
+      en: {
+        siteTitle: "Punjab Emergency Help Hub",
+        regionPill: "Punjab, Pakistan",
+        heroTitle: "Emergency numbers for Punjab, in one place.",
+        heroSubtitle: "Verified emergency and public assistance helplines across the province. Tap copy to save or dial directly.",
+        hero1122Title: "Rescue 1122",
+        hero1122Desc: "Ambulance, Fire & Disaster Rescue",
+        hero15Title: "Police Madadgar",
+        hero15Desc: "Emergency Crime, Safety & Response",
+        lifeWarning: "For life-threatening emergencies, contact the appropriate emergency service immediately.",
+        changeNotice: "Emergency numbers can change. Please verify them with official Punjab Government sources.",
+        searchPlaceholder: "What emergency service do you need? (e.g., 1122, police, fire, bijli, pani...)",
+        searchAria: "What emergency service do you need?",
+        skipSearch: "Skip to search",
+        allCategories: "All",
+        pinnedTitle: "My Pinned Numbers",
+        clearPins: "Clear all",
+        resultsFound: "services found",
+        showingAll: "Showing all 16 services",
+        noResults: "No matching emergency services found",
+        trySearching: "Try searching for:",
+        whenToUse: "When to use:",
+        lastVerifiedPrefix: "Last verified: 3 October 2026",
+        sourcePrefix: "Source:",
+        visitWeb: "Visit website",
+        findOnPortal: "Find this department on the official Punjab portal",
+        copyNum: "Copy number",
+        copied: "Copied!",
+        pinCard: "Pin number",
+        unpinCard: "Unpin number",
+        navHome: "Home",
+        navServices: "Services",
+        navCallGuide: "How to call",
+        navDepts: "Departments",
+        navSources: "Sources",
+        quickLinks: "Quick Links",
+        topNumbers: "Key Numbers",
+        officialWebsites: "Official Portals",
+        shareBtn: "Share this site",
+        printBtn: "Print numbers",
+        backToTop: "Back to top",
+        guideTitle: "What to say when you call",
+        guideSubtitle: "Stay calm and follow this standard sequence to get help as fast as possible:",
+        guideStep1: "State what happened clearly (accident, crime, medical emergency, fire).",
+        guideStep2: "Give your exact location, street name, and an easily recognized landmark.",
+        guideStep3: "State how many people are hurt, trapped, or in danger.",
+        guideStep4: "Provide your full name and an active contact number.",
+        guideStep5: "Stay on the line until the operator explicitly instructs you to hang up.",
+        guideWarning: "Do not call emergency lines for non-emergencies. It delays help for people in danger.",
+        deptsTitle: "Departments and Official Websites",
+        deptsSubtitle: "Official government portals and verified authority resources across Punjab.",
+        sourcesTitle: "Sources and Verification",
+        sourcesDesc: "All helpline numbers listed on this hub are cross-referenced with Punjab Government portals, Punjab Safe Cities Authority publications, and relevant department communications as of 3 October 2026.",
+        footerAbout: "An independent, civic emergency contact reference directory for residents and visitors of Punjab, Pakistan.",
+        disclaimer: "Disclaimer: This is an independent civic information platform, not run by the Government of the Punjab. Emergency numbers were verified on 3 October 2026 and should always be confirmed with official sources.",
+        developedBy: "Developed by Ehtisham",
+        modalTitle: "Choose your language\nاپنی زبان منتخب کریں",
+        modalSubtitle: "Select your preferred interface language",
+        modalSkip: "Skip / جاری رکھیں (Esc)",
+        copiedToast: "Number copied to clipboard!"
+      },
+      ur: {
+        siteTitle: "پنجاب ایمرجنسی ہیلپ ہب",
+        regionPill: "پنجاب، پاکستان",
+        heroTitle: "پنجاب کے ایمرجنسی نمبر، ایک ہی جگہ",
+        heroSubtitle: "صوبہ پنجاب کے تصدیق شدہ ایمرجنسی اور عوامی ہیلپ لائن نمبرز۔ کاپی کر کے محفوظ کریں یا براہِ راست کال کریں۔",
+        hero1122Title: "ریسکیو 1122",
+        hero1122Desc: "ایمبولینس، فائر اور قدرتی آفات ریسکیو",
+        hero15Title: "پولیس مددگار 15",
+        hero15Desc: "ہنگامی جرائم کی روک تھام اور سیکیورٹی",
+        lifeWarning: "جان لیوا ایمرجنسی کی صورت میں فوراً متعلقہ ایمرجنسی سروس سے رابطہ کریں۔",
+        changeNotice: "ایمرجنسی نمبر تبدیل ہو سکتے ہیں۔ براہِ کرم سرکاری ذرائع سے تصدیق کر لیں۔",
+        searchPlaceholder: "آپ کو کون سی ایمرجنسی سروس درکار ہے؟",
+        searchAria: "آپ کو کون سی ایمرجنسی سروس درکار ہے؟",
+        skipSearch: "براہِ راست تلاش پر جائیں",
+        allCategories: "سب",
+        pinnedTitle: "میرے محفوظ کردہ نمبر",
+        clearPins: "سب ختم کریں",
+        resultsFound: "سروسز دستیاب ہیں",
+        showingAll: "تمام 16 سروسز دکھائی جا رہی ہیں",
+        noResults: "کوئی متعلقہ سروس نہیں ملی",
+        trySearching: "یہ الفاظ تلاش کر کے دیکھیں:",
+        whenToUse: "کب استعمال کریں:",
+        lastVerifiedPrefix: "آخری تصدیق: 3 اکتوبر 2026",
+        sourcePrefix: "ذریعہ:",
+        visitWeb: "ویب سائٹ دیکھیں",
+        findOnPortal: "پنجاب حکومت کے آفیشل پورٹل پر اس محکمے کو تلاش کریں",
+        copyNum: "نمبر کاپی کریں",
+        copied: "نمبر کاپی ہو گیا",
+        pinCard: "نمبر محفوظ کریں",
+        unpinCard: "فہرست سے ہٹائیں",
+        navHome: "ہوم",
+        navServices: "سروسز",
+        navCallGuide: "کال کیسے کریں",
+        navDepts: "محکمے",
+        navSources: "ذرائع",
+        quickLinks: "فوری لنکس",
+        topNumbers: "اہم ترین نمبرز",
+        officialWebsites: "سرکاری پورٹلز",
+        shareBtn: "ویب سائٹ شیئر کریں",
+        printBtn: "نمبرز پرنٹ کریں",
+        backToTop: "اوپر جائیں",
+        guideTitle: "کال کرتے وقت کیا کہیں",
+        guideSubtitle: "پرسکون رہیں اور فوری اور مؤثر مدد کے لیے ان مراحل پر عمل کریں:",
+        guideStep1: "واقعہ کی نوعیت بتائیں (حادثہ، جرم، طبی ایمرجنسی یا آگ)۔",
+        guideStep2: "اپنا درست مقام، سڑک کا نام اور قریبی مشہور نشان واضح بتائیں۔",
+        guideStep3: "بتائیں کہ کتنے افراد زخمی یا خطرے میں ہیں۔",
+        guideStep4: "اپنا پورا نام اور چالو رابطہ نمبر درج کروائیں۔",
+        guideStep5: "جب تک آپریٹر نہ کہے لائن پر رہیں اور فون مت کاٹیں۔",
+        guideWarning: "غیر ہنگامی حالات میں ایمرجنسی لائن پر کال مت کریں۔ اس سے خطرے میں گھرے افراد کی مدد میں تاخیر ہوتی ہے۔",
+        deptsTitle: "سرکاری محکمے اور ویب سائٹس",
+        deptsSubtitle: "پنجاب حکومت اور دیگر سرکاری اداروں کے مصدقہ پورٹلز۔",
+        sourcesTitle: "ذرائع اور تصدیق",
+        sourcesDesc: "اس پورٹل پر درج تمام نمبرز کی تصدیق پنجاب حکومت کے مصدقہ ریکارڈ اور پریس ریلیز کے مطابق 3 اکتوبر 2026 کو کی گئی ہے۔",
+        footerAbout: "پنجاب کے شہریوں اور مسافروں کے لیے ایک آزاد اور عوامی فلاحی معلوماتی پورٹل۔",
+        disclaimer: "وضاحت: یہ ایک آزاد معلوماتی پلیٹ فارم ہے اور حکومتِ پنجاب کے زیرِ انتظام نہیں ہے۔ تمام نمبرز 3 اکتوبر 2026 کو تصدیق کیے گئے اور ضرورت پڑنے پر سرکاری ذرائع سے تصدیق کر لیں۔",
+        developedBy: "Developed by Ehtisham",
+        modalTitle: "Choose your language\nاپنی زبان منتخب کریں",
+        modalSubtitle: "براہِ کرم اپنی ترجیحی زبان کا انتخاب کریں",
+        modalSkip: "آگے بڑھیں (Esc)",
+        copiedToast: "نمبر کلپ بورڈ پر کاپی ہو گیا!"
+      }
+    };
+
+    /**
+     * ====================================================================
+     * 2. APPLICATION STATE MANAGEMENT
+     * ====================================================================
+     */
+    const AppState = {
+      lang: "en",
+      theme: "light",
+      category: "all",
+      searchQuery: "",
+      pinnedIds: []
+    };
+
+    // Safe Storage Helpers
+    function getStorage(key, fallback = null) {
+      try {
+        const val = localStorage.getItem(key);
+        return val !== null ? JSON.parse(val) : fallback;
+      } catch (e) {
+        return fallback;
+      }
+    }
+
+    function setStorage(key, val) {
+      try {
+        localStorage.setItem(key, JSON.stringify(val));
+      } catch (e) {}
+    }
+
+    function sanitizeHTML(str) {
+      if (!str) return "";
+      const temp = document.createElement("div");
+      temp.textContent = str;
+      return temp.innerHTML;
+    }
+
+    /**
+     * ====================================================================
+     * 3. INITIALIZATION & LOADER
+     * ====================================================================
+     */
+    window.addEventListener("DOMContentLoaded", () => {
+      // 1. Theme setup
+      const savedTheme = getStorage("pehh_theme", null);
+      if (savedTheme) {
+        AppState.theme = savedTheme;
+      } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        AppState.theme = "dark";
+      }
+      applyTheme(AppState.theme);
+
+      // 2. Language setup
+      const savedLang = getStorage("pehh_lang", null);
+      if (savedLang) {
+        AppState.lang = savedLang;
+      } else {
+        // First visit modal logic
+        checkFirstVisitModal();
+      }
+
+      // 3. Pinned items setup
+      AppState.pinnedIds = getStorage("pehh_pinned", []);
+
+      // 4. Saved Category setup
+      const savedCategory = getStorage("pehh_cat", "all");
+      AppState.category = savedCategory;
+
+      // 5. Render Core UI
+      updateLanguageUI();
+      renderCategoryChips();
+      renderDepartments();
+      renderCards();
+
+      // 6. Non-blocking fast loader removal (<0.9s)
+      handleLoaderDismissal();
+
+      // 7. Setup Interactivity Listeners
+      setupEventHandlers();
+      setupIntersectionObserver();
+    });
+
+    /**
+     * Loader logic with sessionStorage & fast rAF dismissal
+     */
+    function handleLoaderDismissal() {
+      const loader = document.getElementById("loader");
+      let alreadySeenSession = false;
+      try {
+        alreadySeenSession = sessionStorage.getItem("pehh_visited") === "true";
+      } catch (e) {}
+
+      if (alreadySeenSession) {
+        loader.classList.add("hidden");
+        setTimeout(() => loader.remove(), 50);
+        return;
+      }
+
+      // Dismiss after one frame + short paint delay (under 0.85s total)
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          loader.classList.add("hidden");
+          try {
+            sessionStorage.setItem("pehh_visited", "true");
+          } catch (e) {}
+          setTimeout(() => {
+            if (loader.parentNode) loader.remove();
+          }, 380);
+        }, 700);
+      });
+    }
+
+    /**
+     * First visit language choice modal
+     */
+    function checkFirstVisitModal() {
+      const modal = document.getElementById("lang-modal");
+      const hasChosen = getStorage("pehh_lang", null);
+
+      if (!hasChosen) {
+        // Check if browser prefers Urdu
+        const prefersUrdu = (navigator.language || "").toLowerCase().startsWith("ur");
+        if (prefersUrdu) {
+          document.getElementById("choose-ur").classList.add("selected");
+        } else {
+          document.getElementById("choose-en").classList.add("selected");
+        }
+
+        setTimeout(() => {
+          modal.classList.add("active");
+          document.getElementById("choose-en").focus();
+        }, 850);
+      }
+    }
+
+    function closeModal() {
+      const modal = document.getElementById("lang-modal");
+      modal.classList.remove("active");
+      document.getElementById("search-input").focus();
+    }
+
+    /**
+     * ====================================================================
+     * 4. THEMING & LANGUAGE MANAGEMENT
+     * ====================================================================
+     */
+    function applyTheme(theme) {
+      AppState.theme = theme;
+      const doc = document.documentElement;
+      const themeIcon = document.getElementById("theme-icon");
+      if (theme === "dark") {
+        doc.classList.add("dark");
+        themeIcon.innerHTML = '<use href="#icon-sun"/>';
+      } else {
+        doc.classList.remove("dark");
+        themeIcon.innerHTML = '<use href="#icon-moon"/>';
+      }
+      setStorage("pehh_theme", theme);
+    }
+
+    function toggleTheme() {
+      applyTheme(AppState.theme === "dark" ? "light" : "dark");
+    }
+
+    function setLanguage(lang) {
+      AppState.lang = lang;
+      setStorage("pehh_lang", lang);
+      updateLanguageUI();
+      renderCategoryChips();
+      renderCards();
+      renderDepartments();
+    }
+
+    function updateLanguageUI() {
+      const lang = AppState.lang;
+      const dict = I18N[lang];
+      const isUrdu = lang === "ur";
+
+      // Set document dir & lang attributes
+      document.documentElement.lang = lang;
+      document.documentElement.dir = isUrdu ? "rtl" : "ltr";
+
+      // Update static data-i18n elements
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) {
+          el.textContent = dict[key];
+        }
+      });
+
+      // Update Header & Drawer Buttons
+      document.getElementById("header-lang-label").textContent = isUrdu ? "English" : "اردو";
+      document.getElementById("drawer-lang-label").textContent = isUrdu ? "Switch to English" : "Switch to اردو";
+      document.getElementById("footer-lang-label").textContent = isUrdu ? "Switch to English" : "اردو میں دیکھیں";
+
+      // Update Search Inputs & Placeholders
+      const searchInput = document.getElementById("search-input");
+      searchInput.placeholder = dict.searchPlaceholder;
+      searchInput.setAttribute("aria-label", dict.searchAria);
+
+      // Suggestions in empty state
+      renderEmptySuggestions();
+    }
+
+    /**
+     * ====================================================================
+     * 5. RENDERING (CHIPS, CARDS, PINNED, DEPARTMENTS)
+     * ====================================================================
+     */
+    function renderCategoryChips() {
+      const container = document.getElementById("category-chips-row");
+      const currentCat = AppState.category;
+      const lang = AppState.lang;
+
+      let html = "";
+      CATEGORIES.forEach(cat => {
+        const isActive = cat.id === currentCat;
+        const label = lang === "ur" ? cat.ur : cat.en;
+        html += `
+          <button
+            type="button"
+            class="category-chip ${isActive ? 'active' : ''}"
+            data-cat="${cat.id}"
+            role="radio"
+            aria-checked="${isActive}"
+          >
+            ${sanitizeHTML(label)}
+          </button>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    function renderEmptySuggestions() {
+      const container = document.getElementById("empty-suggestions");
+      const isUrdu = AppState.lang === "ur";
+      const sampleQueries = isUrdu
+        ? ["1122", "پولیس", "فائر", "بجلی", "پانی", "خواتین", "موٹروے"]
+        : ["1122", "Police", "Fire", "Bijli", "Pani", "Women", "Motorway"];
+
+      let html = "";
+      sampleQueries.forEach(q => {
+        html += `<button type="button" class="suggestion-chip" data-suggest="${q}">${q}</button>`;
+      });
+      container.innerHTML = html;
+    }
+
+    function filterServices() {
+      const q = AppState.searchQuery.trim().toLowerCase();
+      const cat = AppState.category;
+      const lang = AppState.lang;
+
+      return EMERGENCY_SERVICES.filter(item => {
+        // Category check
+        const matchesCategory = (cat === "all" || item.category === cat);
+        if (!matchesCategory) return false;
+
+        // Search query check
+        if (!q) return true;
+
+        const langData = item[lang] || item.en;
+        const name = (langData.name || "").toLowerCase();
+        const desc = (langData.desc || "").toLowerCase();
+        const num = (item.number || "").toLowerCase();
+        const when = (langData.whenToUse || "").toLowerCase();
+        const keywords = item.keywords.join(" ").toLowerCase();
+
+        return (
+          num.includes(q) ||
+          name.includes(q) ||
+          desc.includes(q) ||
+          when.includes(q) ||
+          keywords.includes(q)
+        );
+      });
+    }
+
+    function renderCards() {
+      const grid = document.getElementById("services-grid");
+      const pinnedGrid = document.getElementById("pinned-cards-grid");
+      const pinnedSection = document.getElementById("pinned-section");
+      const emptyState = document.getElementById("empty-state");
+      const countStatus = document.getElementById("results-count-text");
+      const lang = AppState.lang;
+      const dict = I18N[lang];
+
+      const filtered = filterServices();
+
+      // Pinned services
+      const pinnedServices = EMERGENCY_SERVICES.filter(s => AppState.pinnedIds.includes(s.id));
+      if (pinnedServices.length > 0 && AppState.searchQuery === "") {
+        pinnedSection.classList.add("has-pins");
+        pinnedGrid.innerHTML = pinnedServices.map(s => createCardHTML(s, true)).join("");
+      } else {
+        pinnedSection.classList.remove("has-pins");
+        pinnedGrid.innerHTML = "";
+      }
+
+      // Empty State Handling
+      if (filtered.length === 0) {
+        grid.innerHTML = "";
+        emptyState.classList.add("show");
+        countStatus.textContent = dict.noResults;
+        return;
+      }
+
+      emptyState.classList.remove("show");
+      countStatus.textContent = AppState.searchQuery || AppState.category !== "all"
+        ? `${filtered.length} ${dict.resultsFound}`
+        : dict.showingAll;
+
+      grid.innerHTML = filtered.map(s => createCardHTML(s, false)).join("");
+    }
+
+    function createCardHTML(service, isInsidePinnedGrid) {
+      const lang = AppState.lang;
+      const dict = I18N[lang];
+      const data = service[lang] || service.en;
+      const isPinned = AppState.pinnedIds.includes(service.id);
+
+      const catObj = CATEGORIES.find(c => c.id === service.category);
+      const catLabel = catObj ? (lang === "ur" ? catObj.ur : catObj.en) : service.category;
+
+      const websiteLink = service.website
+        ? `<a href="${service.website}" target="_blank" rel="noopener noreferrer" class="card-link">
+             ${dict.visitWeb} <svg width="12" height="12"><use href="#icon-ext-link"/></svg>
+           </a>`
+        : `<a href="https://punjab.gov.pk/" target="_blank" rel="noopener noreferrer" class="card-link">
+             ${dict.findOnPortal} <svg width="12" height="12"><use href="#icon-ext-link"/></svg>
+           </a>`;
+
+      return `
+        <article class="service-card" data-id="${service.id}" tabindex="0">
+          <div class="card-top-row">
+            <span class="card-category-pill">
+              <svg width="14" height="14"><use href="#${service.icon}"/></svg>
+              <span>${sanitizeHTML(catLabel)}</span>
+            </span>
+            <button
+              type="button"
+              class="card-pin-btn ${isPinned ? 'pinned' : ''}"
+              data-pin="${service.id}"
+              title="${isPinned ? dict.unpinCard : dict.pinCard}"
+              aria-label="${isPinned ? dict.unpinCard : dict.pinCard}"
+            >
+              <svg width="18" height="18"><use href="#icon-star"/></svg>
+            </button>
+          </div>
+
+          <h3 class="card-service-name">${sanitizeHTML(data.name)}</h3>
+          <div class="card-service-num service-number">${sanitizeHTML(service.number)}</div>
+          <p class="card-desc">${sanitizeHTML(data.desc)}</p>
+
+          <div class="card-usage-box">
+            <span class="card-usage-title">${dict.whenToUse}</span>
+            <span>${sanitizeHTML(data.whenToUse)}</span>
+          </div>
+
+          <div class="card-meta-box">
+            <div><strong>${dict.lastVerifiedPrefix}</strong></div>
+            <div><strong>${dict.sourcePrefix}</strong> ${sanitizeHTML(service.source)}</div>
+            <div style="margin-top:0.35rem;">${websiteLink}</div>
+          </div>
+
+          <div class="card-action-bar">
+            <button type="button" class="copy-btn" data-copy="${service.number}" aria-label="${dict.copyNum} ${service.number}">
+              <svg width="16" height="16"><use href="#icon-copy"/></svg>
+              <span>${dict.copyNum}</span>
+            </button>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderDepartments() {
+      const container = document.getElementById("depts-grid");
+      const lang = AppState.lang;
+      const dict = I18N[lang];
+
+      let html = "";
+      DEPARTMENTS.forEach(dept => {
+        const d = dept[lang] || dept.en;
+        html += `
+          <div class="dept-card">
+            <div>
+              <h3 class="dept-name">${sanitizeHTML(d.name)}</h3>
+              <p class="dept-desc">${sanitizeHTML(d.desc)}</p>
+            </div>
+            <a href="${dept.url}" target="_blank" rel="noopener noreferrer" class="card-link" style="font-size:0.85rem;">
+              ${dict.visitWeb} <svg width="13" height="13"><use href="#icon-ext-link"/></svg>
+            </a>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    /**
+     * ====================================================================
+     * 6. CLIPBOARD & TOAST NOTIFICATION
+     * ====================================================================
+     */
+    function copyToClipboard(text) {
+      if (!text) return;
+      const cleanNum = text.trim();
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(cleanNum)
+          .then(() => showToast())
+          .catch(() => fallbackCopy(cleanNum));
+      } else {
+        fallbackCopy(cleanNum);
+      }
+    }
+
+    function fallbackCopy(text) {
+      try {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+        showToast();
+      } catch (err) {}
+    }
+
+    let toastTimer = null;
+    function showToast() {
+      const toast = document.getElementById("toast-msg");
+      const toastText = document.getElementById("toast-text");
+      toastText.textContent = I18N[AppState.lang].copiedToast;
+
+      toast.classList.add("show");
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2200);
+    }
+
+    /**
+     * ====================================================================
+     * 7. EVENT HANDLERS & NAVIGATION
+     * ====================================================================
+     */
+    function setupEventHandlers() {
+      // 1. Language Modal Choice
+      document.getElementById("choose-en").addEventListener("click", () => {
+        setLanguage("en");
+        closeModal();
+      });
+      document.getElementById("choose-ur").addEventListener("click", () => {
+        setLanguage("ur");
+        closeModal();
+      });
+      document.getElementById("modal-skip").addEventListener("click", closeModal);
+
+      // 2. Language Switch Buttons (Header, Drawer, Footer)
+      const toggleLangAction = () => {
+        setLanguage(AppState.lang === "en" ? "ur" : "en");
+      };
+      document.getElementById("header-lang-btn").addEventListener("click", toggleLangAction);
+      document.getElementById("drawer-lang-btn").addEventListener("click", () => {
+        toggleLangAction();
+        closeMobileDrawer();
+      });
+      document.getElementById("footer-lang-btn").addEventListener("click", toggleLangAction);
+
+      // 3. Theme Toggle
+      document.getElementById("theme-toggle-btn").addEventListener("click", toggleTheme);
+
+      // 4. Header Search Jump Button
+      document.getElementById("header-search-jump").addEventListener("click", () => {
+        const input = document.getElementById("search-input");
+        input.scrollIntoView({ behavior: "smooth", block: "center" });
+        setTimeout(() => input.focus(), 300);
+      });
+
+      // 5. Search Bar Input (80ms debounce)
+      const searchInput = document.getElementById("search-input");
+      const clearBtn = document.getElementById("search-clear");
+      let debounceTimer = null;
+
+      searchInput.addEventListener("input", (e) => {
+        const val = e.target.value;
+        clearBtn.classList.toggle("visible", val.length > 0);
+
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          AppState.searchQuery = val;
+          renderCards();
+        }, 80);
+      });
+
+      clearBtn.addEventListener("click", () => {
+        searchInput.value = "";
+        clearBtn.classList.remove("visible");
+        AppState.searchQuery = "";
+        renderCards();
+        searchInput.focus();
+      });
+
+      // 6. Category Filter Chips click delegation
+      document.getElementById("category-chips-row").addEventListener("click", (e) => {
+        const chip = e.target.closest(".category-chip");
+        if (!chip) return;
+        const cat = chip.getAttribute("data-cat");
+        AppState.category = cat;
+        setStorage("pehh_cat", cat);
+        renderCategoryChips();
+        renderCards();
+      });
+
+      // 7. Suggestions click delegation
+      document.getElementById("empty-suggestions").addEventListener("click", (e) => {
+        const btn = e.target.closest(".suggestion-chip");
+        if (!btn) return;
+        const query = btn.getAttribute("data-suggest");
+        searchInput.value = query;
+        clearBtn.classList.add("visible");
+        AppState.searchQuery = query;
+        renderCards();
+      });
+
+      // 8. Global Card Action Click Delegation (Copy & Pin)
+      document.addEventListener("click", (e) => {
+        // Copy action
+        const copyBtn = e.target.closest("[data-copy]");
+        if (copyBtn) {
+          const num = copyBtn.getAttribute("data-copy");
+          copyToClipboard(num);
+          return;
+        }
+
+        // Pin action
+        const pinBtn = e.target.closest("[data-pin]");
+        if (pinBtn) {
+          const id = pinBtn.getAttribute("data-pin");
+          togglePin(id);
+          return;
+        }
+      });
+
+      // 9. Clear All Pins
+      document.getElementById("clear-all-pins").addEventListener("click", () => {
+        AppState.pinnedIds = [];
+        setStorage("pehh_pinned", []);
+        renderCards();
+      });
+
+      // 10. Mobile Drawer Controls
+      const drawerOverlay = document.getElementById("mobile-drawer-overlay");
+      const openBtn = document.getElementById("hamburger-open");
+      const closeBtn = document.getElementById("hamburger-close");
+
+      function openMobileDrawer() {
+        drawerOverlay.classList.add("active");
+        openBtn.setAttribute("aria-expanded", "true");
+        closeBtn.focus();
+      }
+      function closeMobileDrawer() {
+        drawerOverlay.classList.remove("active");
+        openBtn.setAttribute("aria-expanded", "false");
+      }
+
+      openBtn.addEventListener("click", openMobileDrawer);
+      closeBtn.addEventListener("click", closeMobileDrawer);
+      drawerOverlay.addEventListener("click", (e) => {
+        if (e.target === drawerOverlay) closeMobileDrawer();
+      });
+      document.querySelectorAll(".drawer-link").forEach(link => {
+        link.addEventListener("click", closeMobileDrawer);
+      });
+
+      // 11. Footer Utilities (Share, Print, Back to Top)
+      document.getElementById("back-to-top-btn").addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      document.getElementById("print-site-btn").addEventListener("click", () => {
+        window.print();
+      });
+
+      document.getElementById("share-site-btn").addEventListener("click", () => {
+        if (navigator.share) {
+          navigator.share({
+            title: "Punjab Emergency Help Hub",
+            text: "Emergency numbers and verified helplines for Punjab, Pakistan.",
+            url: window.location.href
+          }).catch(() => {});
+        } else {
+          copyToClipboard(window.location.href);
+          alert("Website link copied to clipboard!");
+        }
+      });
+
+      // 12. Keyboard Shortcuts ('/' search, 'Esc' close/clear)
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          // Close modal if open
+          const modal = document.getElementById("lang-modal");
+          if (modal.classList.contains("active")) {
+            closeModal();
+            return;
+          }
+          // Close mobile drawer if open
+          if (drawerOverlay.classList.contains("active")) {
+            closeMobileDrawer();
+            return;
+          }
+          // Clear search if focused
+          if (document.activeElement === searchInput && searchInput.value !== "") {
+            searchInput.value = "";
+            clearBtn.classList.remove("visible");
+            AppState.searchQuery = "";
+            renderCards();
+          }
+        }
+
+        // Focus search on '/'
+        if (e.key === "/" && document.activeElement !== searchInput && !["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) {
+          e.preventDefault();
+          searchInput.scrollIntoView({ behavior: "smooth", block: "center" });
+          searchInput.focus();
+        }
+      });
+
+      // 13. Scroll progress indicator & header glass effect
+      window.addEventListener("scroll", () => {
+        const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolledPercent = height > 0 ? (winScroll / height) * 100 : 0;
+        document.getElementById("scroll-bar").style.width = scrolledPercent + "%";
+
+        const header = document.getElementById("site-header");
+        header.classList.toggle("scrolled", winScroll > 30);
+      }, { passive: true });
+    }
+
+    function togglePin(id) {
+      const idx = AppState.pinnedIds.indexOf(id);
+      if (idx > -1) {
+        AppState.pinnedIds.splice(idx, 1);
+      } else {
+        AppState.pinnedIds.push(id);
+      }
+      setStorage("pehh_pinned", AppState.pinnedIds);
+      renderCards();
+    }
+
+    /**
+     * Active Nav Link Highlighting via IntersectionObserver
+     */
+    function setupIntersectionObserver() {
+      const sections = document.querySelectorAll("section[id], footer[id]");
+      const navLinks = document.querySelectorAll(".nav-desktop .nav-link");
+
+      if (!("IntersectionObserver" in window)) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute("id");
+            navLinks.forEach(link => {
+              const href = link.getAttribute("href").replace("#", "");
+              link.classList.toggle("active", href === id);
+            });
+          }
+        });
+      }, { rootMargin: "-30% 0px -60% 0px" });
+
+      sections.forEach(sec => observer.observe(sec));
+    }
+  </script>
+</body>
+</html>
